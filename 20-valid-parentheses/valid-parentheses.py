@@ -2,6 +2,7 @@ class Solution:
     def isValid(self, s: str) -> bool:
         open_b = "([{"
         close_b = ")]}"
+        d=dict(zip(close_b,open_b))
         st=[]
         for i in s:
             if i in open_b:
@@ -10,12 +11,8 @@ class Solution:
                 if not st:
                     return False
                 else:
-                    if i==')' and st[-1]=='(':
-                        st.pop()
-                    elif i==']' and st[-1]=='[':
-                        st.pop()
-                    elif i=='}' and st[-1]=='{':
+                    if d[i]==st[-1]:
                         st.pop()
                     else:
                         return False
-        return len(st)==0
+        return len(st)==0  # instead of this return not st
